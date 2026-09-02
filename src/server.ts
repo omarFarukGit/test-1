@@ -16,6 +16,8 @@ app.post("/", async (req, res) => {
   })
 });
 
+const name:string=10
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
