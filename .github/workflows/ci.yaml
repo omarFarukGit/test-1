@@ -1,0 +1,60 @@
+name: FixFlow Backend CI
+
+on:
+  push:
+    branches:
+      - development
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  quality-test:
+    name: Quality, Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout source code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Validate Prisma schema
+    #   - name: Validate Prisma Schema
+    #     run: npx prisma validate
+
+      # 5. Generate Prisma Client
+    #   - name: Generate Prisma Client
+    #     run: npx prisma generate
+
+      # 6. Biome lint and format check
+    #   - name: Biome check
+    #     run: npm run lint
+
+      # 7. TypeScript type check
+    #   - name: Type check
+    #     run: npm run type-check
+
+      # 8. Build project
+      - name: Build
+        run: npm run build
+
+      # 9. Run tests
+    #   - name: Run tests
+    #     run: npm test
+
+    #   # 10. Security audit
+    #   - name: Security audit
+    #     run: npm audit --audit-level=high
